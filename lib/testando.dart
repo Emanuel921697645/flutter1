@@ -1,6 +1,7 @@
-import 'dart:ui';
+// ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:ola_mundo1/detalhes_de_um_livro.dart';
 
 class testando extends StatefulWidget {
   const testando({super.key});
@@ -12,137 +13,162 @@ class testando extends StatefulWidget {
 class _testandoState extends State<testando> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Color(0XFFD9D9D9),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: SingleChildScrollView(
+      home: DetalhesDeUmLivro(),
+    );
+  }
+}
+
+class PaginaInicial extends StatelessWidget {
+  const PaginaInicial({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0XFFD9D9D9),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CaixaEntrega(
+                    nome: "Entregue",
+                    cor: Colors.green,
+                    numero: 8,
+                  ),
+                  CaixaEntrega(
+                    nome: "Não Enviadas",
+                    cor: Colors.red,
+                    numero: 3,
+                  )
+                ],
+              )),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Próximas Encomendas",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              const DadosDoLivro()
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+          unselectedItemColor: Colors.black,
+          selectedItemColor: Colors.orange,
+          showUnselectedLabels: true,
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.account_tree_outlined,
+                ),
+                label: "Dashboard"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.agriculture_outlined,
+                ),
+                label: "Encomendas"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.favorite_outline_sharp,
+                ),
+                label: "Classificações"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.account_circle_outlined,
+                ),
+                label: "Perfil")
+          ]),
+    );
+  }
+}
+
+class DadosDoLivro extends StatelessWidget {
+  const DadosDoLivro({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+      padding: const EdgeInsets.all(10),
+      child: Row(
+        children: [
+          Expanded(flex: 1, child: Image.asset("images/1.png")),
+          Expanded(
+            flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CaixaEntrega(
-                      nome: "Entregue",
-                      cor: Colors.green,
-                      numero: 8,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("Estado"),
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 5),
+                          decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Text("Entregador"),
+                        )
+                      ],
                     ),
-                    CaixaEntrega(
-                      nome: "Não Enviadas",
-                      cor: Colors.red,
-                      numero: 3,
-                    )
+                    const IconButton(
+                        onPressed: null, icon: Icon(Icons.more_vert_outlined))
                   ],
-                )),
-                SizedBox(height: 20,),
-                Text("Próximas Encomendas", style: TextStyle(fontSize: 24, fontWeight:FontWeight.bold),),
-                Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      Expanded(flex: 1, child: Image.asset("images/1.png")),
-                      Expanded(
-                        flex: 2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text("Estado"),
-                                    Container(
-                                      padding: EdgeInsets.all(5),
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.orange,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Text("Entregador"),
-                                    )
-                                  ],
-                                ),
-                                IconButton(
-                                    onPressed: null,
-                                    icon: Icon(Icons.more_vert_outlined))
-                              ],
-                            ),
-                            Text("Destinatário"),
-                            Text(
-                              "Sr. Raúl Manuel",
-                              style: TextStyle(color: Colors.black38),
-                            ),
-                            Text("Número Encomendas"),
-                            Text("RF-2012118",
-                                style: TextStyle(color: Colors.black38)),
-                            Row(
-                              children: [
-                                Icon(Icons.phone_android_rounded),
-                                Text("921-69-76-45")
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.place,
-                                  color: Colors.orange,
-                                ),
-                                Text("Centralidade do Kilamba")
-                              ],
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                ),
+                const Text("Destinatário"),
+                const Text(
+                  "Sr. Raúl Manuel",
+                  style: TextStyle(color: Colors.black38),
+                ),
+                const Text("Número Encomendas"),
+                const Text("RF-2012118",
+                    style: TextStyle(color: Colors.black38)),
+                Row(
+                  children: const [
+                    Icon(Icons.phone_android_rounded),
+                    Text("921-69-76-45")
+                  ],
+                ),
+                Row(
+                  children: const [
+                    Icon(
+                      Icons.place,
+                      color: Colors.orange,
+                    ),
+                    Text("Centralidade do Kilamba")
+                  ],
                 )
               ],
             ),
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-            unselectedItemColor: Colors.black,
-            selectedItemColor: Colors.orange,
-            showUnselectedLabels: true,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.account_tree_outlined,
-                  ),
-                  label: "Dashboard"),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.agriculture_outlined,
-                  ),
-                  label: "Encomendas"),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.favorite_outline_sharp,
-                  ),
-                  label: "Classificações"),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.account_circle_outlined,
-                  ),
-                  label: "Perfil")
-            ]),
+          )
+        ],
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class CaixaEntrega extends StatelessWidget {
   int numero;
   String nome;
@@ -155,6 +181,10 @@ class CaixaEntrega extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        width: 150,
+        height: 150,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10), color: Colors.white),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           Container(
@@ -164,13 +194,13 @@ class CaixaEntrega extends StatelessWidget {
                 color: cor.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(50)),
             child: Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                   color: cor, borderRadius: BorderRadius.circular(40)),
               alignment: Alignment.center,
               child: Text(
                 "$numero",
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.white),
@@ -178,11 +208,7 @@ class CaixaEntrega extends StatelessWidget {
             ),
           ),
           Text(nome)
-        ]),
-        width: 150,
-        height: 150,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: Colors.white));
+        ]));
   }
 }
 

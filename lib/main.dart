@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ola_mundo1/testando.dart';
-import 'package:ola_mundo1/testando1.dart';
 
 void main() {
   //int valor = 10;
@@ -43,6 +42,7 @@ void main() {
   }
 }*/
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   String title;
   int valor;
@@ -60,8 +60,8 @@ class MyApp extends StatelessWidget {
         ),
         body: Center(
           child: Text(
-            'Olá Mundo já é ' + this.valor.toString(),
-            style: TextStyle(fontSize: 30, color: Colors.black),
+            'Olá Mundo já é $valor',
+            style: const TextStyle(fontSize: 30, color: Colors.black),
           ),
         ),
       ),
@@ -85,13 +85,12 @@ class _MeuAppState extends State<MeuApp> {
   Widget build(BuildContext context) {
     return Center(
       child: GestureDetector(
-        onTap:() {
-         
+        onTap: () {
           setState(() {
             salario = salario + 100;
           });
-          print('Novo salário $salario');
-          
+          //
+          // print('Novo salário $salario');
         },
         child: Text(
           'O salário de ${widget.nome} é $salario',
@@ -101,5 +100,3 @@ class _MeuAppState extends State<MeuApp> {
     );
   }
 }
-
-
